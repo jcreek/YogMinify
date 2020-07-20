@@ -41,9 +41,6 @@ namespace YogMinify
             DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
             string displayableVersion = $"{version} ({buildDate})";
 
-            // Hide console cursor during normal operation.
-            Console.CursorVisible = false;
-
             // Set window title.
             var windowTitle = "YogMinify v" + displayableVersion;
             Console.Title = windowTitle;
@@ -51,6 +48,12 @@ namespace YogMinify
             // Get list of input files from parsed raw arguments.
             List<string> extra = HandleArgs.GetRawArgs(args);
             string[] files = extra.ToArray();
+
+            if (!HandleArgs.enableCmdAccessFromOtherApps)
+            {
+                // Hide console cursor during normal operation.
+                Console.CursorVisible = false;
+            }
 
             // If no files supplied or help argument supplied, abort and send help.
             if (files.Length < 1 || HandleArgs.showHelp)

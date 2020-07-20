@@ -44,6 +44,7 @@ namespace YogMinify
         public static int test = 0;                      // Test mode, no changes done to files.
         public static int skipwarnings = 0;              // Skip warnings and continue operation.
         public static bool showLibraries = false;        // TODO: Show minify library information.
+        public static bool enableCmdAccessFromOtherApps = false;             // Stops setting Console.CursorVisible to enable other applications to use YogMinify as a process
         public static bool showHelp = false;             // TODO: Show usage and arguments help.
         private static List<string> inputFiles;          // List containing input files found in command line.
 
@@ -85,6 +86,8 @@ namespace YogMinify
                    v => { if (v != null) ++test; } },
                 { "y|skipwarnings", "Skips warnings (like when you're about to minify lots of files) and continues operation.",
                    v => { if (v != null) ++skipwarnings; } },
+                { "c|cmd",  "Enables other applications to use YogMinify as a process.",
+                   v => enableCmdAccessFromOtherApps = v != null },
                 { "h|help",  "Show this message and exit.",
                    v => showHelp = v != null },
             };
